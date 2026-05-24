@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expression de Besoin — Écuries de la Tauge</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f0f2f5;
+  display: flex; align-items: flex-start; justify-content: center;
+  min-height: 100vh; padding: 32px 16px;
+}
+
+.page {
+  background: #fff;
+  width: 794px;
+  min-height: 1123px;
+  padding: 48px 52px 44px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+  border-radius: 4px;
+  display: flex; flex-direction: column; gap: 0;
+  position: relative;
+}
+
+/* ── Header ── */
+.doc-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 3px solid #2E75B6;
+  margin-bottom: 24px;
+}
+.doc-header-left h1 {
+  font-size: 20px; font-weight: 700; color: #1A3A5C;
+  letter-spacing: -0.3px; margin-bottom: 3px;
+}
+.doc-header-left p { font-size: 12px; color: #6B7280; }
+.doc-header-right {
+  text-align: right;
+}
+.badge {
+  display: inline-block;
+  background: #EFF6FF; color: #2E75B6;
+  border: 1px solid #BFDBFE;
+  border-radius: 6px; padding: 4px 10px;
+  font-size: 11px; font-weight: 600;
+  margin-bottom: 4px;
+}
+.doc-header-right p { font-size: 11px; color: #9CA3AF; margin-top: 2px; }
+
+/* ── Meta row ── */
+.meta-row {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  margin-bottom: 22px;
+}
+.meta-card {
+  background: #F8FAFC; border: 1px solid #E2E8F0;
+  border-radius: 8px; padding: 10px 12px;
+}
+.meta-card .label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; color: #94A3B8; margin-bottom: 3px; }
+.meta-card .value { font-size: 12px; font-weight: 600; color: #1E293B; }
+
+/* ── Sections ── */
+section { margin-bottom: 18px; }
+.section-title {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.8px; color: #2E75B6;
+  padding-bottom: 5px; border-bottom: 1px solid #DBEAFE;
+  margin-bottom: 10px;
+}
+
+/* ── Context ── */
+.context-text { font-size: 12.5px; color: #374151; line-height: 1.65; }
+
+/* ── Modules grid ── */
+.modules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.module-card {
+  border-radius: 8px; border: 1px solid #E2E8F0;
+  padding: 10px 12px; background: #F8FAFC;
+}
+.module-card .mod-name { font-size: 12px; font-weight: 700; color: #1E293B; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
+.module-card .mod-name .icon { font-size: 14px; }
+.module-card ul { padding-left: 0; list-style: none; }
+.module-card ul li { font-size: 11px; color: #6B7280; line-height: 1.55; padding-left: 10px; position: relative; }
+.module-card ul li::before { content: '–'; position: absolute; left: 0; color: #94A3B8; }
+
+/* ── Tech & Stack ── */
+.tech-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.tech-chip {
+  display: flex; align-items: center; gap: 5px;
+  background: #F1F5F9; border: 1px solid #E2E8F0;
+  border-radius: 6px; padding: 4px 10px;
+  font-size: 11px; font-weight: 500; color: #475569;
+}
+.tech-chip .dot { width: 6px; height: 6px; border-radius: 50%; }
+.dot-blue { background: #2E75B6; }
+.dot-green { background: #2E8B57; }
+.dot-yellow { background: #D97706; }
+.dot-gray { background: #94A3B8; }
+
+/* ── Two columns ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* ── List simple ── */
+.simple-list { list-style: none; padding: 0; }
+.simple-list li {
+  font-size: 12px; color: #374151; line-height: 1.6;
+  padding-left: 14px; position: relative; padding-bottom: 3px;
+}
+.simple-list li::before { content: '→'; position: absolute; left: 0; color: #2E75B6; font-size: 11px; }
+
+/* ── Footer ── */
+.doc-footer {
+  margin-top: auto; padding-top: 16px;
+  border-top: 1px solid #E2E8F0;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.doc-footer p { font-size: 10px; color: #9CA3AF; }
+.footer-link { font-size: 10px; color: #2E75B6; font-weight: 600; text-decoration: none; }
+
+/* ── Print ── */
+@media print {
+  body { background: none; padding: 0; }
+  .page { box-shadow: none; border-radius: 0; width: 100%; min-height: unset; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="doc-header">
+    <div class="doc-header-left">
+      <h1>Expression de Besoin</h1>
+      <p>Application web de gestion — Écuries de la Tauge</p>
+    </div>
+    <div class="doc-header-right">
+      <div class="badge">Stage 2 · 2025</div>
+      <p>Mathieu Arakelian — BTS SIO SLAM</p>
+      <p>Session 2026 · Lycée de Caussade</p>
+    </div>
+  </div>
+
+  <!-- Meta -->
+  <div class="meta-row">
+    <div class="meta-card">
+      <div class="label">Stagiaire</div>
+      <div class="value">Mathieu Arakelian</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Structure</div>
+      <div class="value">Écuries de la Tauge</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Type de projet</div>
+      <div class="value">Application web métier</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Livrable déployé</div>
+      <div class="value">lataugegestion.fr</div>
+    </div>
+  </div>
+
+  <!-- 1. Contexte -->
+  <section>
+    <div class="section-title">1 · Contexte et problématique</div>
+    <p class="context-text">
+      Les Écuries de la Tauge gèrent un ensemble de prestations équestres : pension de chevaux, cours d'équitation et suivi des clients. Avant ce stage, l'ensemble des données était géré manuellement via des registres papier et des tableurs non connectés, entraînant des pertes de temps, des risques d'erreurs et une absence de vision globale de l'activité.
+      <br><br>
+      Le besoin exprimé est de disposer d'une <strong>application web centralisée</strong>, accessible depuis un navigateur, pour gérer l'intégralité des données de la structure sans installation logicielle.
+    </p>
+  </section>
+
+  <!-- 2. Modules -->
+  <section>
+    <div class="section-title">2 · Fonctionnalités demandées</div>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="mod-name"><span class="icon">🔐</span> Authentification</div>
+        <ul>
+          <li>Connexion sécurisée (login / mot de passe)</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="mod-name"><span class="icon">👤</span> Clients</div>
+        <ul>
+          <li>Fiches clients (CRUD complet)</li>
+          <li>Coordonnées, historique</li>
+          <li>Lien avec les chevaux</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="mod-name"><span class="icon">🐴</span> Chevaux</div>
+        <ul>
+          <li>Fiche cheval (race, âge, robe)</li>
+          <li>Propriétaire associé</li>
+          <li>Box / option</option></li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="mod-name"><span class="icon">🏠</span> Pensions & Boxes</div>
+        <ul>
+          <li>Suivi des boxes et installations</li>
+          <li>Tarifs de pension</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="mod-name"><span class="icon">📅</span> Cours & Horaires</div>
+        <ul>
+          <li>Création de cours (tarif)</li>
+          <li>Planning des séances</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="mod-name"><span class="icon">📊</span> Tableau de bord</div>
+        <ul>
+          <li>Vue synthétique de l'activité</li>
+          <li>Cours du jour</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Tech + Contraintes -->
+  <div class="two-col">
+    <section>
+      <div class="section-title">3 · Stack technique retenue</div>
+      <div class="tech-row">
+        <div class="tech-chip"><span class="dot dot-blue"></span>PHP 8 (MVC)</div>
+        <div class="tech-chip"><span class="dot dot-blue"></span>MySQL</div>
+        <div class="tech-chip"><span class="dot dot-yellow"></span>JavaScript</div>
+        <div class="tech-chip"><span class="dot dot-gray"></span>HTML / CSS</div>
+        <div class="tech-chip"><span class="dot dot-gray"></span>Git / GitHub</div>
+        <div class="tech-chip"><span class="dot dot-green"></span>Apache (prod)</div>
+      </div>
+      <ul class="simple-list" style="margin-top:10px;">
+        <li>Architecture MVC en PHP natif</li>
+        <li>Requêtes préparées PDO (sécurité SQL)</li>
+        <li>Mots de passe hachés (bcrypt)</li>
+        <li>Hébergement : lataugegestion.fr (HTTPS)</li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="section-title">4 · Contraintes identifiées</div>
+      <ul class="simple-list">
+        <li>Interface utilisable sans formation technique</li>
+        <li>Accès navigateur uniquement (pas d'installation)</li>
+        <li>Compatible tablette et bureau</li>
+        <li>Déploiement sur hébergement mutualisé (PHP/MySQL)</li>
+        <li>Protection des données personnelles (RGPD)</li>
+        <li>Livraison en production avant la fin du stage</li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- 4. Livrables -->
+  <section style="margin-top:6px;">
+    <div class="section-title">5 · Livrables</div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <div style="flex:1; min-width:140px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; padding:8px 12px;">
+        <div style="font-size:11px;font-weight:700;color:#166534;margin-bottom:3px;">✓ MCD / MLD</div>
+        <div style="font-size:11px;color:#6B7280;">Modélisation base de données</div>
+      </div>
+      <div style="flex:1; min-width:140px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; padding:8px 12px;">
+        <div style="font-size:11px;font-weight:700;color:#166534;margin-bottom:3px;">✓ Code source</div>
+        <div style="font-size:11px;color:#6B7280;">Versionné sur GitHub</div>
+      </div>
+      <div style="flex:1; min-width:140px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; padding:8px 12px;">
+        <div style="font-size:11px;font-weight:700;color:#166534;margin-bottom:3px;">✓ App en production</div>
+        <div style="font-size:11px;color:#6B7280;">lataugegestion.fr</div>
+      </div>
+      <div style="flex:1; min-width:140px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; padding:8px 12px;">
+        <div style="font-size:11px;font-weight:700;color:#166534;margin-bottom:3px;">✓ Rapport de stage</div>
+        <div style="font-size:11px;color:#6B7280;">Dossier BTS SIO SLAM</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <p>© 2025 Mathieu Arakelian · BTS SIO SLAM · Stage 2 — Écuries de la Tauge</p>
+    <a class="footer-link" href="https://lataugegestion.fr" target="_blank">lataugegestion.fr →</a>
+  </div>
+
+</div>
+</body>
+</html>
